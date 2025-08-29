@@ -1,6 +1,6 @@
-export default function handler(req, res) {
+module.exports = (req, res) => {
   // Allow cross-origin fetches from stores
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Cache-Control", "public, max-age=60");
   res.status(200).json({ text: "🎉 Free Shipping on All Orders! 🎉" });
-}
+};
