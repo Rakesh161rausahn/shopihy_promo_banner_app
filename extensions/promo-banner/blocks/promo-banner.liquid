@@ -1,0 +1,53 @@
+<div id="promo-banner-app" style="position: sticky; top: 0; z-index: 2147483647; width: 100%;">
+  <div id="promo-banner-app-inner" style="background: {{ block.settings.bg | default: '#111827' }}; color: {{ block.settings.fg | default: '#ffffff' }}; text-align: center; padding: 8px 12px; font-size: 14px; font-weight: 600;">
+    <span id="promo-banner-app-text">{{ block.settings.message | default: "🎉 Free Shipping on All Orders! 🎉" }}</span>
+  </div>
+</div>
+<script>
+(function() {
+  try {
+    var api = '{{ block.settings.api_url }}';
+    if (api && api !== '' && /^https?:\/\//i.test(api)) {
+      var el = document.getElementById('promo-banner-app-text');
+      fetch(api, { cache: 'no-store' })
+        .then(function(r){ return r.json(); })
+        .then(function(data){ if (data && data.text && el) { el.textContent = data.text; } })
+        .catch(function(){});
+    }
+  } catch (e) {}
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Promo banner",
+  "type": "app_embed",
+  "target": "body_start",
+  "settings": [
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Banner text",
+      "default": "🎉 Free Shipping on All Orders! 🎉"
+    },
+    {
+      "type": "url",
+      "id": "api_url",
+      "label": "Optional: API URL to fetch banner text (e.g. https://your-app.vercel.app/api/banner)",
+      "default": ""
+    },
+    {
+      "type": "color",
+      "id": "bg",
+      "label": "Background color",
+      "default": "#111827"
+    },
+    {
+      "type": "color",
+      "id": "fg",
+      "label": "Text color",
+      "default": "#ffffff"
+    }
+  ]
+}
+{% endschema %}

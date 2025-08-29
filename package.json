@@ -1,0 +1,12 @@
+{
+  "name": "shopify-promo-banner-app",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "node -e \"console.log('Use Shopify CLI: shopify app dev')\"",
+    "start": "node -e \"console.log('Serverless on Vercel: use vercel dev')\"",
+    "lint": "echo \"No lint configured\""
+  }
+}
